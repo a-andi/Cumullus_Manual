@@ -1,1 +1,420 @@
+#If Mellanox Onyx is installed on the switch, follow HowTo Uninstall Mellanox Onyx and Install ONIE on Mellanox Switches to uninstall Mellanox Onyx and run ONIE on the switch.
+
+Note: This operation may take several hours.
+
+# Connect to the switch's Console port, reboot the switch, and enter the ONIE menu. Select 
+Install OS.
+
+# A discovery process starts automatically, trying to search for the OS to install. Stop the ONIE discovery by running the following:
+ONIE:/ # onie-discovery-stop
+
+# Copy the CumulusLinux image from a remote server to the switch using scp.
+ONIE:/ # scp root@10.20.2.11: cumulus-linux-3.1.1-mlx-amd64-1474679993.bd4e10cz4f9514b.bin
+
+# Install the image.
+ONIE:/ # onie-nos-install cumulus-linux-3.1.1-mlx-amd64-1474679993.bd4e10cz4f9514b.bin
+
+ # Use the following Cumulus Linux credentials to log into the OS.
+Username: cumulus
+Password: CumulusLinux!
+
+# Install the OS license in 3 steps:
+
+a. Run "sudo cl-license -i"
+
+b. Copy paste the license
+
+c. Hit Ctrl-D
+
+# sudo cl-license -i
+
+Paste license text here, then hit ctrl-d
+
+dddddd@mellanox.com|4CeKMCACDhKo67WOPmYetFEFZbnWAg4V4zqD1HFCegs
+
+License file installed.
+
+Service 'switchd' is not running.
+
+Run this command:
+
+sudo systemctl restart switchd
+
+Or reboot to enable functionality.
+
+ 
+
+# Run "sudo systemctl restart switchd" or reboot the server.
+
+# Connect to the switch remotely using SSH.
+
+# Run "ip link show" to see the switch port states. The switch ports will apear as swp1 ... swp32 for SN2700 (32 ports).
+
+# ip link show
+
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default
+
+link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP mode DEFAULT group default qlen 1000
+
+link/ether 7c:fe:90:40:9e:b6 brd ff:ff:ff:ff:ff:ff
+
+3: eth1: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 1000
+
+link/ether 7c:fe:90:40:9e:b7 brd ff:ff:ff:ff:ff:ff
+
+4: swp1: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:bc brd ff:ff:ff:ff:ff:ff
+
+5: swp2: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:be brd ff:ff:ff:ff:ff:ff
+
+6: swp3: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:b8 brd ff:ff:ff:ff:ff:ff
+
+7: swp4: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:ba brd ff:ff:ff:ff:ff:ff
+
+8: swp5: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:b4 brd ff:ff:ff:ff:ff:ff
+
+9: swp6: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:b6 brd ff:ff:ff:ff:ff:ff
+
+10: swp7: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:b0 brd ff:ff:ff:ff:ff:ff
+
+11: swp8: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:b2 brd ff:ff:ff:ff:ff:ff
+
+12: swp9: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:ac brd ff:ff:ff:ff:ff:ff
+
+13: swp10: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:ae brd ff:ff:ff:ff:ff:ff
+
+14: swp11: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:a8 brd ff:ff:ff:ff:ff:ff
+
+15: swp12: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:aa brd ff:ff:ff:ff:ff:ff
+
+16: swp13: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:a4 brd ff:ff:ff:ff:ff:ff
+
+17: swp14: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:a6 brd ff:ff:ff:ff:ff:ff
+
+18: swp15: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:a0 brd ff:ff:ff:ff:ff:ff
+
+19: swp16: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:a2 brd ff:ff:ff:ff:ff:ff
+
+20: swp17: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:80 brd ff:ff:ff:ff:ff:ff
+
+21: swp18: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:82 brd ff:ff:ff:ff:ff:ff
+
+22: swp19: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:84 brd ff:ff:ff:ff:ff:ff
+
+23: swp20: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:86 brd ff:ff:ff:ff:ff:ff
+
+24: swp21: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:88 brd ff:ff:ff:ff:ff:ff
+
+25: swp22: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:8a brd ff:ff:ff:ff:ff:ff
+
+26: swp23: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:8c brd ff:ff:ff:ff:ff:ff
+
+27: swp24: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:8e brd ff:ff:ff:ff:ff:ff
+
+28: swp25: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:90 brd ff:ff:ff:ff:ff:ff
+
+29: swp26: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:92 brd ff:ff:ff:ff:ff:ff
+
+30: swp27: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:94 brd ff:ff:ff:ff:ff:ff
+
+31: swp28: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:96 brd ff:ff:ff:ff:ff:ff
+
+32: swp29: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:98 brd ff:ff:ff:ff:ff:ff
+
+33: swp30: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:9a brd ff:ff:ff:ff:ff:ff
+
+34: swp31: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:9c brd ff:ff:ff:ff:ff:ff
+
+35: swp32: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 500
+
+link/ether 7c:fe:90:40:9e:9e brd ff:ff:ff:ff:ff:ff
+
+36: swid0_eth: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UNKNOWN mode DEFAULT group default qlen 1000
+
+link/ether 7c:fe:90:40:9e:80 brd ff:ff:ff:ff:ff:ff
+
+ 
+
+ 
+
+ 
+
+Troubleshooting
+1. Note that Linux version 4.1 is the kernel version and not the cumulus OS version. You can see that screen on the console after reboot when loading the switch.
+
+5.jpg
+
+ 
+
+To get the Cumulus Release, run:
+
+# cat /etc/lsb-release
+
+DISTRIB_ID="Cumulus Linux"
+
+DISTRIB_RELEASE=3.1.1
+
+DISTRIB_DESCRIPTION="Cumulus Linux 3.1.1"
+
+ 
+
+2. If you change a Mellanox Onyx Spectrum® switch to Cumulus OS, the switch's service may fail.
+
+# systemctl status switchd
+
+\u25cf switchd.service - Cumulus Linux Switch Daemon
+
+Loaded: loaded (/lib/systemd/system/switchd.service; enabled)
+
+Drop-In: /etc/systemd/system/switchd.service.d
+
+\u2514\u2500override.conf
+
+Active: inactive (dead)
+
+In the console screen you may see this error:
+
+6.jpg
+
+ 
+
+This is a known issue, and is related to the number of MAC addresses read from the EEPROM.
+
+ 
+
+a. To Check, run:
+
+# /usr/cumulus/bin/decode-syseeprom
+
+TlvInfo Header:
+
+Id String: TlvInfo
+
+Version: 1
+
+Total Length: 484
+
+TLV Name Code Len Value
+
+-------------------- ---- --- -----
+
+Product Name 0x21 64 Panther Eth 100
+
+Part Number 0x22 20 MSN2700-CS2FO
+
+Serial Number 0x23 24 MT1607X11234
+
+Base MAC Address 0x24 6 7C:FE:90:40:9E:B6
+
+Manufacture Date 0x25 19 02/17/2016 15:29:04
+
+Device Version 0x26 1 0
+
+MAC Addresses 0x2A 2 2
+
+Manufacturer 0x2B 8 Mellanox
+
+Vendor Extension 0xFD 36 0x00 0x00 0x81 0x19 0x00 0x12 0x00 0x01 0x06 0x85 0x00 0x00 0x00 0x46 0x00 0x00 0x08 0x00 0x05 0x05 0x05 0x05 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+
+CRC-32 0xFE 4 0x223400A4
+
+(checksum valid)
+
+ 
+
+In this case you can see only two MAC addresses and the base MAC is 7C:FE:90:40:9E:B6.
+
+ 
+
+b. To workaround this problem, you need to change the number of MAC addresses to 128.
+
+# sudo decode-syseeprom -s
+
+[sudo] password for cumulus:
+
+ 
+
+[a]dd, [m]odify, [d]elete, [f]inished: m <---- type m
+
+Enter a TLV type code: 0x2A <---- This is the Code for the MAC addresses
+
+Enter the value: 128 <---- Change the number of MAC addresses to 128
+
+ 
+
+[a]dd, [m]odify, [d]elete, [f]inished: f <---- type f
+
+TlvInfo Header:
+
+Id String: TlvInfo
+
+Version: 1
+
+Total Length: 484
+
+TLV Name Code Len Value
+
+-------------------- ---- --- -----
+
+Product Name 0x21 64 Panther Eth 100
+
+Part Number 0x22 20 MSN2700-CS2FO
+
+Serial Number 0x23 24 MT1607X11234
+
+Base MAC Address 0x24 6 7C:FE:90:40:9E:B6
+
+Manufacture Date 0x25 19 02/17/2016 15:29:04
+
+Device Version 0x26 1 0
+
+MAC Addresses 0x2A 2 128
+
+Manufacturer 0x2B 8 Mellanox
+
+Vendor Extension 0xFD 36 0x00 0x00 0x81 0x19 0x00 0x12 0x00 0x01 0x06 0x85 0x00 0x00 0x00 0x46 0x00 0x00 0x08 0x00 0x05 0x05 0x05 0x05 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+
+CRC-32 0xFE 4 0x5F6DF783
+
+ 
+
+Please review eeprom content:
+
+ 
+
+Save eeprom content? <y/n> y <---- Save
+
+ 
+
+c. Change the base MAC in the 6 LSBs to zero. In this example, B6, which is 10110110, needs to be changed to 10000000 = 0x80.
+
+The MAC address in this example needs to be changed to 7C:FE:90:40:9E:80.
+
+# sudo decode-syseeprom -s
+
+ 
+
+[a]dd, [m]odify, [d]elete, [f]inished: m <---- type m
+
+Enter a TLV type code: 0x24 <--- Code for Base MAC address
+
+Enter the value: 7C:FE:90:40:9E:80
+
+ 
+
+[a]dd, [m]odify, [d]elete, [f]inished: f <---- type f
+
+TlvInfo Header:
+
+Id String: TlvInfo
+
+Version: 1
+
+Total Length: 484
+
+TLV Name Code Len Value
+
+-------------------- ---- --- -----
+
+Product Name 0x21 64 Panther Eth 100
+
+Part Number 0x22 20 MSN2700-CS2FO
+
+Serial Number 0x23 24 MT1607X11234
+
+Base MAC Address 0x24 6 7C:FE:90:40:9E:80
+
+Manufacture Date 0x25 19 02/17/2016 15:29:04
+
+Device Version 0x26 1 0
+
+MAC Addresses 0x2A 2 128
+
+Manufacturer 0x2B 8 Mellanox
+
+Vendor Extension 0xFD 36 0x00 0x00 0x81 0x19 0x00 0x12 0x00 0x01 0x06 0x85 0x00 0x00 0x00 0x46 0x00 0x00 0x08 0x00 0x05 0x05 0x05 0x05 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+
+CRC-32 0xFE 4 0xF869F15A
+
+ 
+
+Please review eeprom content:
+
+ 
+
+Save eeprom content? <y/n> y <--- type y
+
+ 
+
+d. Reboot and check again. Run ip link show.
+
+ 
+
+3. When changing from Mellanox Onyx to Cumulus OS, or the other way around, you may encounter problems with links that are not coming UP. In this case, you may need to reburn the firmware of the switch to change the PSID (part number and device information).
+
+If you encounter this, contact Mellanox support.
+
 
