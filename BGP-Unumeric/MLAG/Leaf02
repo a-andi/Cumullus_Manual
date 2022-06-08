@@ -1,0 +1,3 @@
+cumulus@leaf01:~$ net add clag peer sys-mac 44:38:39:BE:EF:AA interface swp49-50 primary backup-ip 10.10.10.2
+cumulus@leaf01:~$ net pending
+cumulus@leaf01:~$ net commit
