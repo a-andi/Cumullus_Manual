@@ -1,6 +1,6 @@
 #Port Mlag to Leaf02 swp49 and swp50
 #sys-mac : This range of MAC addresses is 44:38:39:ff:00:00 to 44:38:39:ff:ff:ff. Use this range of MAC addresses when configuring MLAG
-
+# eth0 for the heartbit backup MLAG
 
 cumulus@leaf01:~$ net add clag peer sys-mac 44:38:39:BE:EF:AA interface swp49-50 primary backup-ip 10.10.10.2
 cumulus@leaf01:~$ net pending
