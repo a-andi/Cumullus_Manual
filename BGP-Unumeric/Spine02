@@ -45,13 +45,13 @@ router bgp 65500
 
   address-family ipv4 unicast
     network 2.2.2.2/32
-    neighbor spine02 prefix-list sindo-in in
+    neighbor spine02 prefix-list SO-in in
 
   address-family l2vpn evpn
     neighbor spine02 activate
     advertise-all-vni
 
-ip prefix-list sindo-in seq 10 permit 2.2.2.0/24 le 32
+ip prefix-list SO-in seq 10 permit 2.2.2.0/24 le 32
 line vty
 
 snmp-server
