@@ -1,4 +1,5 @@
-#If Mellanox Onyx is installed on the switch, follow HowTo Uninstall Mellanox Onyx and Install ONIE on Mellanox Switches to uninstall Mellanox Onyx and run ONIE on the switch.
+#If Mellanox Onyx is installed on the switch, 
+#follow HowTo Uninstall Mellanox Onyx and Install ONIE on Mellanox Switches to uninstall Mellanox Onyx and run ONIE on the switch.
 
 Note: This operation may take several hours.
 
