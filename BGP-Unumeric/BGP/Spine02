@@ -1,0 +1,17 @@
+#Range AS number for Private : ASNs between 64512 and 65535 are reserved for private use
+
+cumulus@leaf01:~$ net add ip prefix-list SO-in seq 10 permit 2.2.2.0/24 le 3
+cumulus@leaf01:~$ net add router bgp 65500 bgp router-id 2.2.2.2
+cumulus@leaf01:~$ net add router bgp 65500 address-family ipv4 unicast network 2.2.2.2/32
+cumulus@leaf01:~$ net add router bgp 65500 address-family ipv4 unicast neighbor spine02 prefix-list SO-in in
+cumulus@leaf01:~$ net add router bgp 65500 address-family l2vpn evpn
+cumulus@leaf01:~$ net add router bgp 65500 address-family advertise-all-vni
+cumulus@leaf01:~$ net add router bgp 65500 neighbor spine02 peer-group
+cumulus@leaf01:~$ net add router bgp 65500 neighbor spine02 remote-as external
+cumulus@leaf01:~$ net add router bgp 65500 neighbor spine02 capability extended-nexthop
+cumulus@leaf01:~$ net add router bgp 65500 neighbor swp1 interface peer-group spine02
+cumulus@leaf01:~$ net add router bgp 65500 neighbor swp2 interface peer-group spine02
+
+cumulus@leaf01:~$ net pending
+cumulus@leaf01:~$ net commit
+
